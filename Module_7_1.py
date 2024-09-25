@@ -29,9 +29,8 @@ class Product:
 # Добавляет в файл __file_name каждый продукт из products, если его ещё нет в файле (по названию).
 # Если такой продукт уже есть, то не добавляет и выводит строку 'Продукт <название> уже есть в магазине' .
 
-class Shop(Product):
+class Shop:
     def __init__(self):
-
         self.__file_name = 'products.txt'
         self.a = ''
 
@@ -50,15 +49,17 @@ class Shop(Product):
 
     def add(self,*products):
         self.products = products
+        self.text = self.get_products()
+        file = open(self.__file_name, 'a')
 
         for i in self.products:
-            if str(i) in self.get_products():
-                file = open(self.__file_name, 'a')
-                file.write(f'Продукт{str(i)} уже есть в магазине\n')
+            self.name = str(i).split(',')[0]
+
+            if self.name in self.text:
+                print(f'Продукт{str(i)} уже есть в магазине')
             else:
-                file = open(self.__file_name, 'a')
                 file.write(f'{str(i)}\n')
-            file.close()
+        file.close()
 
 
 
